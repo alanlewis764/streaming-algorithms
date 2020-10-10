@@ -38,14 +38,18 @@ void StickySampling::update(uint64_t x) {
 
 void StickySampling::maintenance() {
     for (auto it = freqMap.begin(); it != freqMap.end(); /*update the iterator explicitly (not increment)*/) {
+        bool erased = false;
         while (dist(rng) < 0.5) {
             it->second--;
             if (it->second == 0) {
                 freqMap.erase(it);
+                erased = true;
                 break;
             }
         }
-        ++it;
+        if (!erased) {
+            ++it;
+        }
     }
 }
 
