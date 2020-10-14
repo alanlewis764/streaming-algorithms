@@ -18,7 +18,7 @@ void StickySampling::update(uint64_t x) {
     if (freqMap.find(x) != freqMap.end()) {
         freqMap[x]++;
     }
-        // Otherwise we add the element to the map with a probability of 1/r
+    // Otherwise we add the element to the map with a probability of 1/r
     else {
         double num = dist(rng);
         if (num < 1.0 / r) {
@@ -27,7 +27,7 @@ void StickySampling::update(uint64_t x) {
     }
     N++;
     itemsSinceMaintenance++;
-    double threshold = r == 1 ? 2 * r * t : r * t;
+    double threshold = r == 1 ? 2 * t : r * t;
     if (itemsSinceMaintenance >= threshold) {
         r *= 2;
         itemsSinceMaintenance = 0;

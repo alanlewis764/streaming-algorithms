@@ -17,8 +17,6 @@ void SpaceSaving::update(uint64_t x) {
         trackedItems[x] = 1;
     } else {
         // remove item with least count, c and add x with out c + 1
-        //TODO: this should be done in log(t) time. Either with additional
-        // BST/minHeap or some type of TreeMap
         uint64_t minCount = UINT64_MAX;
         uint64_t minItem;
         for (auto &item: trackedItems) {
