@@ -18,6 +18,9 @@ class SpaceSavingLinkedList {
 public:
     explicit SpaceSavingLinkedList(uint64_t t);
     void update(uint64_t x);
+    std::unordered_map<uint64_t, uint64_t> output(double support);
+
+private:
     void increment(ListItem* item);
     void splice(ListItem* item);
     void addToParent(ParentBucket *parent, ListItem *item);

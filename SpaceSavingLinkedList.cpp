@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <vector>
 #include "SpaceSavingLinkedList.h"
 
 using namespace std;
@@ -136,6 +137,17 @@ void SpaceSavingLinkedList::addToParent(ParentBucket *parent, ListItem *item) {
         ListItem *temp = parent->child->next;
         parent->child->next = item;
         item->next = temp;
+    }
+}
+
+unordered_map<uint64_t, uint64_t> SpaceSavingLinkedList::output(double threshold) {
+    unordered_map<uint64_t, uint64_t> returnMap;
+    for (auto const &pair: hashmap) {
+        ListItem *item = pair.second;
+        if (item->parentBucket->value >= threshold) {
+            returnMap[item->ID] = item->parentBucket->value;
+        }
+        return returnMap;
     }
 }
 
