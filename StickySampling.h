@@ -29,7 +29,7 @@ class StickySampling {
 public:
     StickySampling(double s, double eps, double delta);
     void update(uint64_t x);
-    std::vector<uint64_t> output();
+    std::unordered_map<uint64_t, uint64_t> output();
 
 private:
     void maintenance();

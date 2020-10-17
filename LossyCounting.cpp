@@ -2,7 +2,6 @@
 // Created by Alan Lewis on 8/10/20.
 //
 
-#include <vector>
 #include "LossyCounting.h"
 
 using namespace std;
@@ -33,7 +32,7 @@ void LossyCounting::maintenance() {
     // delete all items that have a count D
     for (auto it = trackedItems.begin(); it != trackedItems.end(); /*update the iterator explicitly (not increment)*/) {
         if (it->second.first + it->second.second <= b_current) {
-            trackedItems.erase(it);
+            it = trackedItems.erase(it);
         } else {
             ++it;
         }
@@ -48,7 +47,6 @@ unordered_map<uint64_t, uint64_t> LossyCounting::output() {
         if (f >= (s-eps) * N) {
             returnMap[itemID] = f;
         }
-        return returnMap;
     }
-
+    return returnMap;
 }

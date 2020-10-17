@@ -53,12 +53,12 @@ void StickySampling::maintenance() {
     }
 }
 
-std::vector<uint64_t> StickySampling::output() {
-    vector<uint64_t> out;
+unordered_map<uint64_t, uint64_t> StickySampling::output() {
+    unordered_map<uint64_t, uint64_t> outMap;
     for (auto const &pair: freqMap) {
         if (pair.second >= (s - eps) * N) {
-            out.push_back(pair.first);
+            outMap[pair.first] = pair.second;
         }
     }
-    return out;
+    return outMap;
 }

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-SpaceSavingLinkedList::SpaceSavingLinkedList(uint64_t t) : t(t){
+SpaceSavingLinkedList::SpaceSavingLinkedList(uint64_t t) : t(t) {
     smallestParentBucket = new ParentBucket(0);
 }
 
@@ -147,8 +147,8 @@ unordered_map<uint64_t, uint64_t> SpaceSavingLinkedList::output(double threshold
         if (item->parentBucket->value >= threshold) {
             returnMap[item->ID] = item->parentBucket->value;
         }
-        return returnMap;
     }
+    return returnMap;
 }
 
 

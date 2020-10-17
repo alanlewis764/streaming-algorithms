@@ -18,7 +18,7 @@ class SpaceSavingLinkedList {
 public:
     explicit SpaceSavingLinkedList(uint64_t t);
     void update(uint64_t x);
-    std::unordered_map<uint64_t, uint64_t> output(double support);
+    std::unordered_map<uint64_t, uint64_t> output(double threshold);
 
 private:
     void increment(ListItem* item);

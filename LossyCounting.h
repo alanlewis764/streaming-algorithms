@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <unordered_map>
+#include <vector>
 
 class LossyCounting {
     std::unordered_map<uint64_t, std::pair<uint32_t, uint32_t>> trackedItems;
