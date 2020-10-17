@@ -12,26 +12,27 @@ LossyCounting::LossyCounting(double eps, double s) : eps(eps), s(s) {
 }
 
 void LossyCounting::update(uint64_t x) {
-    m++;
+    N++;
+    b_current =  ceil(N/w);
     // if x is already tracked, increment the counter add it with count D+1
     if (trackedItems.find(x) != trackedItems.end()) {
-        trackedItems[x]++;
+        trackedItems[x].first++;
     } else {
-        trackedItems[x] = D + 1;
+        trackedItems[x] = {1, b_current-1};
     }
 
     // if D =/= floor m/k then update D and do maintenance
-    if (D != floor(m / k)) {
-        D = (uint32_t) m / k;
+    if (N % w == 0) {
         maintenance();
     }
+
 
 }
 
 void LossyCounting::maintenance() {
     // delete all items that have a count D
     for (auto it = trackedItems.begin(); it != trackedItems.end(); /*update the iterator explicitly (not increment)*/) {
-        if (it->second <= D) {
+        if (it->second.first + it->second.second <= b_current) {
             trackedItems.erase(it);
         } else {
             ++it;
@@ -39,11 +40,15 @@ void LossyCounting::maintenance() {
     }
 }
 
-vector<uint64_t> LossyCounting::output() {
-    vector<uint64_t> out;
-    //TODO Ask about paper implementation vs Lecture Slide implementation
+unordered_map<uint64_t, uint64_t> LossyCounting::output() {
+    unordered_map<uint64_t, uint64_t> returnMap;
     for (auto const &pair: trackedItems) {
-        out.push_back(pair.first);
+        uint64_t itemID = pair.first;
+        uint32_t f = pair.second.first;
+        if (f >= (s-eps) * N) {
+            returnMap[itemID] = f;
+        }
+        return returnMap;
     }
-    return out;
+
 }

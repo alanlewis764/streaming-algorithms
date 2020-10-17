@@ -10,10 +10,20 @@ using namespace std;
 
 
 #define UNIVERSE_SIZE 4294967296
-
+double calculate_precision(const unordered_set<uint64_t>& exact, const unordered_set<uint64_t>& estimates) {
+    double actuallyFrequent = 0;
+    for (auto item: estimates) {
+        if (exact.find(item) != exact.end()) {
+            actuallyFrequent++;
+        }
+    }
+    return actuallyFrequent/estimates.size();
+}
 
 int main() {
     double s = 0.001;
+    double eps = s/10;
+    double delta = 0.05; //TODO: Test this out...
     int N = 0;
     cout << "hello" << endl;
     FILE *fin = fopen("/Users/alanlewis/CLionProjects/StreamComputingA2/zipf_z1_1.txt", "r");

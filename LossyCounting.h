@@ -10,16 +10,17 @@
 #include <unordered_map>
 
 class LossyCounting {
-    uint32_t D = 0;
-    uint32_t m = 0;
-    std::unordered_map<uint64_t, uint32_t> trackedItems;
+    std::unordered_map<uint64_t, std::pair<uint32_t, uint32_t>> trackedItems;
     double eps;
     double s;
+    uint32_t w = ceil(1/eps);
+    uint32_t b_current = 1;
+    uint32_t N = 0;
     double k;
 public:
     LossyCounting(double eps, double s);
     void update(uint64_t x);
-    std::vector<uint64_t> output();
+    std::unordered_map<uint64_t, uint64_t> output();
 
 private:
     void maintenance();
